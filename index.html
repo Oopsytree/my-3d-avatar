@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>3D Avatar CV v2</title>
+<title>3D Avatar CV </title>
 
 <style>
 body {
@@ -124,7 +124,7 @@ controls.autoRotateSpeed = 0.5;
 // 🔴 REPLACE THIS URL WITH YOUR OWN
 const loader = new THREE.OBJLoader();
 loader.load(
-    https://raw.github.com/Oopsytree/my-3d-avatar/main/avatar.obj
+    'https://raw.github.com/Oopsytree/my-3d-avatar/main/avatar.obj',
     function(object){
         object.scale.set(1.5,1.5,1.5);
         scene.add(object);
