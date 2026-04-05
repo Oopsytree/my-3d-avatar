@@ -67,7 +67,6 @@ body {
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/loaders/OBJLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/controls/OrbitControls.js"></script>
 </head>
 
 <body>
@@ -115,11 +114,6 @@ const light2 = new THREE.DirectionalLight(0xffffff, 1);
 light2.position.set(5,10,7.5);
 scene.add(light2);
 
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableZoom = false;
-controls.enablePan = false;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.5;
 
 // 🔴 REPLACE THIS URL WITH YOUR OWN
 const loader = new THREE.OBJLoader();
@@ -137,7 +131,11 @@ loader.load(
 
 function animate(){
     requestAnimationFrame(animate);
-    controls.update();
+
+    if (scene.children.length > 0) {
+        scene.children[0].rotation.y += 0.01;
+    }
+
     renderer.render(scene, camera);
 }
 animate();
