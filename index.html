@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>3D Avatar CV </title>
+<title>3D Avatar CV</title>
 
 <style>
 body {
@@ -64,13 +64,9 @@ body {
 .card3 { top: 70%; left: 40%; }
 .card4 { top: 40%; left: 0%; }
 </style>
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/loaders/OBJLoader.js"></script>
 </head>
 
 <body>
-
 <div class="scene">
     <div id="avatar3D"></div>
 
@@ -97,16 +93,21 @@ body {
     </div>
 </div>
 
-<script>
+<!-- Modern Three.js + OBJLoader -->
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
+import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/loaders/OBJLoader.js';
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
 
-const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 renderer.setSize(600, 600);
 document.getElementById('avatar3D').appendChild(renderer.domElement);
 
 camera.position.z = 5;
 
+// Lights
 const light1 = new THREE.AmbientLight(0xffffff, 1);
 scene.add(light1);
 
@@ -114,11 +115,10 @@ const light2 = new THREE.DirectionalLight(0xffffff, 1);
 light2.position.set(5,10,7.5);
 scene.add(light2);
 
-
-// 🔴 REPLACE THIS URL WITH YOUR OWN
-const loader = new THREE.OBJLoader();
+// Load your OBJ model
+const loader = new OBJLoader();
 loader.load(
-    'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.obj',
+    'https://raw.githubusercontent.com/oopsytree/my-3d-avatar/main/avatar.obj', // Replace with your avatar OBJ URL
     function(object){
         object.scale.set(1.5,1.5,1.5);
         scene.add(object);
@@ -129,17 +129,15 @@ loader.load(
     }
 );
 
+// Simple rotation animation
 function animate(){
     requestAnimationFrame(animate);
-
-    if (scene.children.length > 0) {
+    if (scene.children.length > 0){
         scene.children[0].rotation.y += 0.01;
     }
-
     renderer.render(scene, camera);
 }
 animate();
 </script>
-
 </body>
 </html>
