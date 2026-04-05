@@ -118,7 +118,7 @@ scene.add(light2);
 // Load your OBJ model
 const loader = new OBJLoader();
 loader.load(
-    'https://raw.githubusercontent.com/oopsytree/my-3d-avatar/main/avatar.obj', // Replace with your avatar OBJ URL
+    'avatar.obj',
     function(object){
         object.scale.set(1.5,1.5,1.5);
         scene.add(object);
